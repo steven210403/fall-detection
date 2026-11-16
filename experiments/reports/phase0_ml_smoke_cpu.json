@@ -1,0 +1,81 @@
+{
+  "environment": {
+    "python": "3.14.8",
+    "python_full": "3.14.8 (main, Sep 30 2026, 17:55:09) [Clang 21.0.0 (clang-2100.3.34.2)]",
+    "implementation": "CPython",
+    "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "processor": "arm",
+    "numpy": "2.5.4",
+    "opencv": "5.0.0",
+    "torch": "2.14.1",
+    "torch_mps_built": true,
+    "torch_mps_available": true,
+    "torchvision": "0.29.1",
+    "ultralytics": "8.4.177"
+  },
+  "results": [
+    {
+      "check": "numpy",
+      "status": "PASS",
+      "detail": "numpy 2.5.4, int32+float32 ops OK",
+      "seconds": 0.0002
+    },
+    {
+      "check": "torch-numpy-bridge",
+      "status": "PASS",
+      "detail": "torch 2.14.1 / numpy 2.5.4, shared memory confirmed",
+      "seconds": 0.0003
+    },
+    {
+      "check": "opencv",
+      "status": "PASS",
+      "detail": "opencv 5.0.0, numpy 2.5.4, encode/decode/resize/gray/flow OK, CUDA build=False",
+      "seconds": 0.0042
+    },
+    {
+      "check": "torchvision",
+      "status": "PASS",
+      "detail": "torchvision 0.29.1, batch (2, 3, 224, 224), MobileNetV3-Small embedding (2, 576)",
+      "seconds": 0.1134
+    },
+    {
+      "check": "gru-forward-backward-cpu",
+      "status": "PASS",
+      "detail": "device=cpu logits=(32, 6) loss=0.6965 state=(1, 32, 64) gradients finite",
+      "seconds": 0.0088
+    },
+    {
+      "check": "gru-forward-backward-mps",
+      "status": "PASS",
+      "detail": "device=mps logits=(32, 6) loss=0.7056 state=(1, 32, 64) gradients finite",
+      "seconds": 0.1012
+    },
+    {
+      "check": "yolo26n-s-inference",
+      "status": "PASS",
+      "detail": "yolo26n.pt device=cpu dets=0 first_latency=0.056s classes=[] sha256=9b09cc8bf347f0fc | yolo26s.pt device=cpu dets=0 first_latency=0.088s classes=[] sha256=646f8bc3fe0a6568",
+      "seconds": 0.2166,
+      "device": "cpu",
+      "weights_dir": "/Volumes/Lexarz/steven/project/models/phase0"
+    },
+    {
+      "check": "yolo-training-step",
+      "status": "SKIP",
+      "detail": "run separately: scripts/phase0_yolo_train_step.py builds a synthetic fixture and reports checkpoint creation (kept out of this script to avoid nested ultralytics runs)",
+      "device": "cpu"
+    },
+    {
+      "check": "bytetrack",
+      "status": "PASS",
+      "detail": "bytetrack (config bytetrack.yaml): 20/20 frames tracked, ids=[1], buffer=30 frames",
+      "seconds": 0.0346
+    },
+    {
+      "check": "botsort",
+      "status": "PASS",
+      "detail": "botsort (config botsort.yaml): 20/20 frames tracked, ids=[1], buffer=30 frames",
+      "seconds": 0.0177
+    }
+  ]
+}

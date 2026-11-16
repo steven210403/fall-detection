@@ -1,0 +1,73 @@
+{
+  "check": "pose_benchmark",
+  "status": "PASS",
+  "dataset": "coco-pose.yaml",
+  "imgsz": 640,
+  "device": "mps",
+  "results": {
+    "yolo11n-pose": {
+      "weights_sha256": "869e83fcdffdc7371fa4e34cd8e51c838cc729571d1635e5141e3075e9319dc0",
+      "box": {
+        "precision": 0.8922,
+        "recall": 0.8241,
+        "map50": 0.9217,
+        "map50_95": 0.7048
+      },
+      "pose": {
+        "precision": 0.8495,
+        "recall": 0.7605,
+        "map50": 0.8081,
+        "map50_95": 0.5035
+      },
+      "speed_ms_per_image": {
+        "preprocess": 0.143,
+        "inference": 3.492,
+        "loss": 0.0,
+        "postprocess": 6.62
+      }
+    },
+    "yolo26n-pose": {
+      "weights_sha256": "eb3bb8268828aeaf515cec23a4bfafd793944a86fe9af94ba7823609c14522a9",
+      "box": {
+        "precision": 0.8713,
+        "recall": 0.8278,
+        "map50": 0.9125,
+        "map50_95": 0.6689
+      },
+      "pose": {
+        "precision": 0.84,
+        "recall": 0.7826,
+        "map50": 0.8296,
+        "map50_95": 0.5686
+      },
+      "speed_ms_per_image": {
+        "preprocess": 0.143,
+        "inference": 1.692,
+        "loss": 0.0,
+        "postprocess": 6.384
+      }
+    },
+    "yolov8n-pose": {
+      "weights_sha256": "c6fa93dd1ee4a2c18c900a45c1d864a1c6f7aba75d84f91648a30b7fb641d212",
+      "box": {
+        "precision": 0.8661,
+        "recall": 0.8264,
+        "map50": 0.9125,
+        "map50_95": 0.6962
+      },
+      "pose": {
+        "precision": 0.839,
+        "recall": 0.7475,
+        "map50": 0.7981,
+        "map50_95": 0.5059
+      },
+      "speed_ms_per_image": {
+        "preprocess": 0.142,
+        "inference": 1.321,
+        "loss": 0.0,
+        "postprocess": 6.72
+      }
+    }
+  },
+  "note": "measured with the Ultralytics validator; COCO-Pose val2017 unless --data says otherwise. coco8-pose is a smoke test, not a benchmark."
+}

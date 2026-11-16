@@ -1,0 +1,8 @@
+Dataset untuk fall-detection-ta; ekstrak di folder yang sama dengan zip kode.
+packed: 2026-11-16T21:03:07+0700
+commit: a6e1d4d9a42beba33dc5852d69e792bcdb9698d8 (kode saat dataset dikemas)
+
+datasets/raw/urfd                           142 file  4.2G
+datasets/raw/caucafall                      100 file  129M
+datasets/raw/demo                             1 file  468K
+datasets/cache/fall_observations            507 file  16M

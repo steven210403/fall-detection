@@ -1,0 +1,95 @@
+[project]
+name = "fall-detection"
+version = "0.0.0"
+description = "Multi-person observable activity recognition in elevated office CCTV (Phases 0-5)."
+readme = "README.md"
+requires-python = ">=3.14,<3.15"
+license = "MIT"
+authors = [{ name = "Thesis author" }]
+
+# Phase 0 pins. Every version below was checked against the official package
+# registry on 2026-10-14 before installation. See docs/COMPATIBILITY_REPORT.md.
+dependencies = [
+    # Scientific / CV stack
+    "numpy==2.5.4",
+    "scipy==1.18.1",
+    "opencv-python==5.0.0.93",
+    "scikit-learn==1.9.1",
+    "lap==0.5.13",
+    # Deep learning
+    "torch==2.14.1",
+    "torchvision==0.29.1",
+    "ultralytics==8.4.177",
+    # Intel GPU (Iris Xe) and CPU inference through an OpenVINO export (FALL_DEVICE=intel:gpu)
+    "openvino==2026.4.1",
+    # Web / configuration
+    "fastapi==0.143.0",
+    "uvicorn==0.54.0",
+    "pydantic==2.14.1",
+    "pydantic-settings==2.15.0",
+    # Persistence
+    "sqlalchemy==2.1.4",
+    "alembic==1.20.0",
+    "websockets>=17.3",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.1.1",
+    # Starlette 1.8 deprecates `httpx` in TestClient and requires `httpx2`
+    # (maintained by Pydantic). Verified 2026-10-14; see COMPATIBILITY_REPORT.md.
+    "httpx2==2.13.1",
+    "ruff==0.17.0",
+    "basedpyright==1.40.2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fall_detection"]
+
+[tool.uv]
+package = true
+# Keep the resolution explicit and reproducible: no prereleases, no dynamic
+# upgrades during the compatibility phase.
+prerelease = "disallow"
+
+# PyPI's Windows PyTorch wheels are CPU-only; the CUDA builds are published only on
+# PyTorch's own index. Windows takes torch/torchvision from there, built for CUDA
+# 13.0 to match the CUDA 13.0 runtime PyPI's Linux wheels pull in. macOS and Linux
+# keep PyPI. ``explicit`` stops every other package from being resolved there.
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu130", marker = "sys_platform == 'win32'" }]
+torchvision = [{ index = "pytorch-cu130", marker = "sys_platform == 'win32'" }]
+
+[tool.pytest.ini_options]
+minversion = "9.0"
+testpaths = ["tests"]
+# ``src`` is the package; ``..`` is the repository root, so the thin entrypoints in
+# ``training/`` and ``scripts/`` are importable by tests exactly as they are by
+# ``uv run python scripts/...`` (§20: those are entrypoints into this package, not a
+# second environment). ``.`` (this directory) is what makes ``tests.helpers_*``
+# importable from the console script; the test modules import their helpers that way,
+# and pytest only adds a test file's own directory to ``sys.path`` under prepend mode.
+pythonpath = ["src", "..", "."]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py314"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.basedpyright]
+pythonVersion = "3.14"
+typeCheckingMode = "standard"
+include = ["src", "tests"]

@@ -1,0 +1,45 @@
+{
+  "video": "datasets/raw/phase2_replay_10min.mp4",
+  "settings": {
+    "video_mode": "mp4",
+    "read_timeout_s": 15.0
+  },
+  "results": [
+    {
+      "check": "clean-eof-replay",
+      "status": "PASS",
+      "detail": "6000 frames, state=ended, source span=599.9s",
+      "seconds": 2.316
+    },
+    {
+      "check": "timestamp-report",
+      "status": "PASS",
+      "detail": "monotonic; source span=599.90s in 2.18s wall; median step=0.1000s; missing source timestamps=0",
+      "seconds": 0.0
+    },
+    {
+      "check": "session-records",
+      "status": "PASS",
+      "detail": "1 session row(s), all closed: [{\"attempt\": 1, \"termination_reason\": \"source_ended\", \"frames_read\": 6000, \"frames_dropped\": 0, \"closed\": true}]",
+      "seconds": 0.001
+    },
+    {
+      "check": "offline-queue-no-drops",
+      "status": "PASS",
+      "detail": "6000 frames, 0 dropped",
+      "seconds": 2.106
+    },
+    {
+      "check": "live-queue-drops-oldest",
+      "status": "PASS",
+      "detail": "live queue capacity 2 held depth 2 and dropped 998/1000 without blocking",
+      "seconds": 0.001
+    },
+    {
+      "check": "decoder-kill-recovery",
+      "status": "PASS",
+      "detail": "killed after 10 frames; reconnects=1, distinct sessions=2, recovered to ended",
+      "seconds": 2.267
+    }
+  ]
+}

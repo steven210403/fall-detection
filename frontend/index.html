@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Pemantauan Jatuh Lansia</title>
+    <!-- No icon has been designed; an empty one stops the browser requesting /favicon.ico. -->
+    <link rel="icon" href="data:," />
+    <script>
+      // Resolve the theme before first paint so a dark system never flashes a light page.
+      // The key and the rule match src/hooks/useTheme.ts.
+      (function () {
+        var stored = null;
+        try {
+          stored = localStorage.getItem("cctv-theme");
+        } catch (e) {}
+        var dark =
+          stored === "dark" ||
+          (stored !== "light" &&
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

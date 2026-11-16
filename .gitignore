@@ -1,0 +1,48 @@
+# Python / uv
+__pycache__/
+*.py[cod]
+.venv/
+.python-version.bak
+*.egg-info/
+dist/
+build/
+
+# Node / Bun
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Data and artifacts (never commit raw footage, weights, or secrets)
+data/
+datasets/raw/
+datasets/processed/
+datasets/cache/
+experiments/runs/
+*.db
+*.db-wal
+*.db-shm
+*.pt
+*.onnx
+*.engine
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+._*
+models/
+.pytest_cache/
+.ruff_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Agents
+!AGENTS.md
+.graphify-out/
+# local TLS certificate and key
+auto.crt
+auto.key

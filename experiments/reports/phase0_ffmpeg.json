@@ -1,0 +1,34 @@
+{
+  "video": "datasets/raw/phase2_replay_10min.mp4",
+  "results": [
+    {
+      "check": "ffmpeg-binaries",
+      "status": "PASS",
+      "detail": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers | ffmpeg=/opt/homebrew/bin/ffmpeg ffprobe=/opt/homebrew/bin/ffprobe | videotoolbox=True rtsp_demuxer=True"
+    },
+    {
+      "check": "container-and-streams",
+      "status": "PASS",
+      "detail": "{\"format\":\"mov,mp4,m4a,3gp,3g2,mj2\",\"duration_s\":600.0,\"size_bytes\":22016510,\"codec\":\"h264\",\"profile\":\"High\",\"pix_fmt\":\"yuv420p\",\"width\":640,\"height\":360,\"avg_frame_rate\":\"10/1\",\"nb_frames\":\"6000\",\"bit_rate\":\"293553\"}",
+      "video": "datasets/raw/phase2_replay_10min.mp4"
+    },
+    {
+      "check": "rawvideo-bgr24-pipe",
+      "status": "PASS",
+      "detail": "30 frames, shape=(30, 360, 640, 3), dtype=uint8, first-frame mean=125.81",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "check": "presentation-timestamps",
+      "status": "PASS",
+      "detail": "6000 timestamps, first=0.000s last=599.900s, monotonic",
+      "video": "datasets/raw/phase2_replay_10min.mp4"
+    },
+    {
+      "check": "rtsp-probe",
+      "status": "SKIP",
+      "detail": "no authorized RTSP URL supplied; set --rtsp-url or FALL_RTSP_URL. RTSP access must be validated against the institution's camera."
+    }
+  ]
+}

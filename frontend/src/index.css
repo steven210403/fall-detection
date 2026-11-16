@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/*
+ * Theme tokens.
+ *
+ * Direction: DESIGN.md (Engineering Blueprint), adapted for a caregiver dashboard. Kept: the
+ * navy and off-white base, one orange accent, 0px corners, hairline rules. Dropped: the grid
+ * background, the neon green, and monospace body text. Red belongs to the fall states only,
+ * and orange belongs to controls only, so an alarm is never mistaken for a button.
+ *
+ * The resolved theme lives on `<html data-theme="light|dark">`, set before first paint by the
+ * inline script in `index.html` and kept current by `useTheme`. Components use the semantic
+ * colours below (`bg-surface`, `text-fg-muted`, `border-line`, ...), so they switch with the
+ * theme without a `dark:` variant on every element. Every text pair is at least 4.5:1 in both
+ * themes.
+ */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-fg: var(--accent-fg);
+  --color-focus: var(--focus);
+  --color-danger: var(--danger);
+  --color-danger-strong: var(--danger-strong);
+  --color-danger-fg: var(--danger-fg);
+  --color-viewport: #050b12;
+  /* System sans for prose: no font download on a local monitoring machine, and it renders
+     Indonesian well at small sizes. Mono carries the schematic voice: titles and measured
+     values. JetBrains Mono is used when it is installed; it is not downloaded. */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+:root {
+  --canvas: #edeae3;
+  --surface: #f7f5f0;
+  --surface-2: #f0ede6;
+  --line: #c9ccd1;
+  --line-strong: #8e98a6;
+  --fg: #0b1623;
+  --fg-muted: #46556a;
+  --accent: #ff9f30;
+  --accent-strong: #e8861a;
+  --accent-fg: #0b1623;
+  --focus: #0b1623;
+  --danger: #b3261e;
+  --danger-strong: #8f1c16;
+  --danger-fg: #a3221b;
+  --mark: var(--fg-muted);
+  color-scheme: light;
+}
+
+/* No-JS fallback: follow the system until the script has resolved a theme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --canvas: #0b1623;
+    --surface: #0f1d2e;
+    --surface-2: #14253a;
+    --line: #1f3147;
+    --line-strong: #3a5170;
+    --fg: #f0f0f0;
+    --fg-muted: #8b9bb4;
+    --accent: #ff9f30;
+    --accent-strong: #ffb45c;
+    --accent-fg: #0b1623;
+    --focus: #ff9f30;
+    --danger: #c62a20;
+    --danger-strong: #8f1c16;
+    --danger-fg: #ff8f85;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --canvas: #0b1623;
+  --surface: #0f1d2e;
+  --surface-2: #14253a;
+  --line: #1f3147;
+  --line-strong: #3a5170;
+  --fg: #f0f0f0;
+  --fg-muted: #8b9bb4;
+  --accent: #ff9f30;
+  --accent-strong: #ffb45c;
+  --accent-fg: #0b1623;
+  --focus: #ff9f30;
+  --danger: #c62a20;
+  --danger-strong: #8f1c16;
+  --danger-fg: #ff8f85;
+  color-scheme: dark;
+}
+
+@layer base {
+  body {
+    background: var(--canvas);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Tailwind v4 resets buttons to the default cursor; every enabled control shows a pointer. */
+  a[href],
+  button:not(:disabled),
+  summary,
+  select:not(:disabled),
+  label[for],
+  [role="button"],
+  [role="radio"] {
+    cursor: pointer;
+  }
+
+  :disabled {
+    cursor: not-allowed;
+  }
+}
+
+/*
+ * Identity motif: corner marks.
+ *
+ * The backend draws a box with a `#id` around each person in the video. The same four corner
+ * marks frame the video viewport and each person card, so a card reads as "the box around #3".
+ * A card in a fall state turns its marks red. Static: no motion.
+ */
+@utility marks {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    --m: var(--mark);
+    background:
+      linear-gradient(var(--m), var(--m)) top left / 12px 2px no-repeat,
+      linear-gradient(var(--m), var(--m)) top left / 2px 12px no-repeat,
+      linear-gradient(var(--m), var(--m)) top right / 12px 2px no-repeat,
+      linear-gradient(var(--m), var(--m)) top right / 2px 12px no-repeat,
+      linear-gradient(var(--m), var(--m)) bottom left / 12px 2px no-repeat,
+      linear-gradient(var(--m), var(--m)) bottom left / 2px 12px no-repeat,
+      linear-gradient(var(--m), var(--m)) bottom right / 12px 2px no-repeat,
+      linear-gradient(var(--m), var(--m)) bottom right / 2px 12px no-repeat;
+  }
+}
+
+@utility marks-danger {
+  --mark: var(--danger-fg);
+}

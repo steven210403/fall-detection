@@ -1,0 +1,6 @@
+# Synthetic Phase 0 fixture. Not research data.
+path: /Volumes/Lexarz/steven/project/datasets/synthetic
+train: images/train
+val: images/train
+names:
+  0: person

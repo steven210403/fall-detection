@@ -1,0 +1,47 @@
+{
+  "rows": [
+    {
+      "model": "yolov8n-pose",
+      "coco_box_map50_95": 0.6962,
+      "coco_pose_map50_95": 0.5059,
+      "caucafall_f1": 0.7863,
+      "urfd_f1_frozen": 0.7436,
+      "urfd_accuracy_frozen": 0.7101,
+      "urfd_recall_frozen": 0.9667,
+      "urfd_specificity_frozen": 0.5128,
+      "urfd_frame_f1_frozen": 0.6884,
+      "urfd_f1_literature": 0.623,
+      "detector_fps": 90.7,
+      "detector_ms_mean": 11.025
+    },
+    {
+      "model": "yolo11n-pose",
+      "coco_box_map50_95": 0.7048,
+      "coco_pose_map50_95": 0.5035,
+      "caucafall_f1": 0.8073,
+      "urfd_f1_frozen": 0.7714,
+      "urfd_accuracy_frozen": 0.7681,
+      "urfd_recall_frozen": 0.9,
+      "urfd_specificity_frozen": 0.6667,
+      "urfd_frame_f1_frozen": 0.638,
+      "urfd_f1_literature": 0.7188,
+      "detector_fps": 76.01,
+      "detector_ms_mean": 13.157
+    },
+    {
+      "model": "yolo26n-pose",
+      "coco_box_map50_95": 0.6689,
+      "coco_pose_map50_95": 0.5686,
+      "caucafall_f1": 0.8,
+      "urfd_f1_frozen": 0.6984,
+      "urfd_accuracy_frozen": 0.7246,
+      "urfd_recall_frozen": 0.7333,
+      "urfd_specificity_frozen": 0.7179,
+      "urfd_frame_f1_frozen": 0.473,
+      "urfd_f1_literature": 0.5667,
+      "detector_fps": 75.29,
+      "detector_ms_mean": 13.282
+    }
+  ],
+  "markdown": "| Model | COCO box mAP50-95 | COCO pose mAP50-95 | CAUCAFall F1 (calib.) | URFD F1 | URFD Acc | URFD Recall | URFD Spec. | URFD frame F1 | URFD F1 (literature) | Detector FPS | Detector ms |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| yolov8n-pose | 0.696 | 0.506 | 0.786 | 0.744 | 0.710 | 0.967 | 0.513 | 0.688 | 0.623 | 90.700 | 11.025 |\n| yolo11n-pose | 0.705 | 0.503 | 0.807 | 0.771 | 0.768 | 0.900 | 0.667 | 0.638 | 0.719 | 76.010 | 13.157 |\n| yolo26n-pose | 0.669 | 0.569 | 0.800 | 0.698 | 0.725 | 0.733 | 0.718 | 0.473 | 0.567 | 75.290 | 13.282 |"
+}
